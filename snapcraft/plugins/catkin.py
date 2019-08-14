@@ -33,6 +33,10 @@ Additionally, this plugin uses the following plugin-specific keywords:
       List of catkin packages to build. If not specified, all packages in the
       workspace will be built. If set to an empty list ([]), no packages will
       be built.
+    - catkin-packages-ignore:
+      (list of strings)
+      List of catkin packages to ignore. If not specified, no packages will be
+      ignored.
     - source-space:
       (string)
       The source space containing Catkin packages. By default this is 'src'.
@@ -168,6 +172,12 @@ class CatkinPlugin(snapcraft.BasePlugin):
             "uniqueItems": True,
             "items": {"type": "string"},
         }
+        schema["properties"]["catkin-packages-ignore"] = {
+            "type": "array",
+            "minitems": 1,
+            "uniqueItems": True,
+            "items": {"type": "string"},
+        }
         schema["properties"]["source-space"] = {"type": "string", "default": "src"}
 
         # The default is true since we expect most Catkin packages to be ROS
@@ -220,6 +230,7 @@ class CatkinPlugin(snapcraft.BasePlugin):
         # change in the YAML Snapcraft will consider the pull step dirty.
         return [
             "catkin-packages",
+            "catkin-packages-ignore",
             "source-space",
             "include-roscore",
             "underlay",
@@ -784,6 +795,11 @@ class CatkinPlugin(snapcraft.BasePlugin):
             # Specify the packages to be built
             catkincmd.append("--pkg")
             catkincmd.extend(self.catkin_packages)
+
+        if self.catkin_packages_ignore:
+            # Specify the packages to be built
+            catkincmd.append("--ignore-pkg")
+            catkincmd.extend(self.catkin_packages_ignore)
 
         # Don't clutter the real ROS workspace-- use the Snapcraft build
         # directory
