@@ -34,6 +34,14 @@ if [ -d "$SNAP/opt/ros/underlay_ws/opt/ros/$ROS_DISTRO" ]; then
 
     export PATH="$SNAP/opt/ros/underlay_ws/usr/bin:$PATH"
     export LD_LIBRARY_PATH="$SNAP/opt/ros/underlay_ws/usr/lib:$SNAP/opt/ros/underlay_ws/usr/lib/$ARCH_TRIPLET:$LD_LIBRARY_PATH"
+
+    if [ -d "$SNAP/opt/ros/underlay_ws/usr/lib/$ARCH_TRIPLET/blas" ]; then
+        export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$SNAP/opt/ros/underlay_ws/usr/lib/$ARCH_TRIPLET/blas"
+    fi
+
+    if [ -d "$SNAP/opt/ros/underlay_ws/usr/lib/$ARCH_TRIPLET/lapack" ]; then
+        export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$SNAP/opt/ros/underlay_ws/usr/lib/$ARCH_TRIPLET/lapack"
+    fi
 fi
 
 activate_workspace "$SNAP/opt/ros/$ROS_DISTRO" --local --extend
