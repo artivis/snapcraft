@@ -46,4 +46,12 @@ fi
 
 activate_workspace "$SNAP/opt/ros/$ROS_DISTRO" --local --extend
 
+if [ -d "$SNAP/usr/lib/$ARCH_TRIPLET/blas" ]; then
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$SNAP/usr/lib/$ARCH_TRIPLET/blas"
+fi
+
+if [ -d "$SNAP/usr/lib/$ARCH_TRIPLET/lapack" ]; then
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$SNAP/usr/lib/$ARCH_TRIPLET/lapack"
+fi
+
 exec "${original_args[@]}"
