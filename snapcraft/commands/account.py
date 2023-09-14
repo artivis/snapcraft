@@ -23,7 +23,7 @@ import pathlib
 import stat
 import textwrap
 from datetime import datetime
-from typing import TYPE_CHECKING, Dict, Union
+from typing import TYPE_CHECKING, Any, Dict
 
 from craft_cli import BaseCommand, emit
 from craft_cli.errors import ArgumentParsingError
@@ -88,7 +88,7 @@ class StoreLoginCommand(BaseCommand):
             action="store_true",
             default=False,
             help=(
-                "Deprecated option to enable candid login. "
+                "(deprecated) Enable candid login. "
                 f"Set {store.constants.ENVIRONMENT_STORE_AUTH}=candid instead"
             ),
         )
@@ -179,7 +179,7 @@ class StoreExportLoginCommand(BaseCommand):
             action="store_true",
             default=False,
             help=(
-                "Deprecated option to enable candid login. "
+                "(deprecated) Enable candid login. "
                 f"Set {store.constants.ENVIRONMENT_STORE_AUTH}=candid instead"
             ),
         )
@@ -192,7 +192,7 @@ class StoreExportLoginCommand(BaseCommand):
                 f"Set {store.constants.ENVIRONMENT_STORE_AUTH}=candid instead",
             )
 
-        kwargs: Dict[str, Union[str, int]] = {}
+        kwargs: Dict[str, Any] = {}
         if parsed_args.snaps:
             kwargs["packages"] = parsed_args.snaps.split(",")
         if parsed_args.channels:

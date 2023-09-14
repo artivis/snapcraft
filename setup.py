@@ -99,7 +99,7 @@ if sys.platform == "win32":
 install_requires = [
     "attrs",
     "click",
-    "craft-archives==0.0.3",
+    "craft-archives",
     "craft-cli",
     "craft-grammar",
     "craft-parts",
@@ -153,7 +153,7 @@ if sys.platform == "linux":
 if ubuntu:
     install_requires += [
         "catkin-pkg",
-        "python-apt@https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/python-apt/2.0.0ubuntu0.20.04.6/python-apt_2.0.0ubuntu0.20.04.6.tar.xz",
+        "python-apt@https://launchpad.net/ubuntu/+archive/primary/+sourcefiles/python-apt/2.4.0ubuntu1/python-apt_2.4.0ubuntu1.tar.xz",
         "python-debian",
     ]
 
